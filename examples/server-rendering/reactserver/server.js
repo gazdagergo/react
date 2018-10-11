@@ -12,7 +12,7 @@ var app = express();
 // Note that this is a backend service hit by your actual web app. Even so,
 // you would probably put Varnish in front of this in production.
 app.get('/', function(req, res){
-  var component = require(path.resolve(req.query['module']));
+  var component = React.createFactory(require(path.resolve(req.query['module'])));
   var props = JSON.parse(req.query['props'] || '{}');
 
   res.send(React.renderToString(component(props)));
